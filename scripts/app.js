@@ -21,7 +21,9 @@ const gameModule = (() => {
   // DOM cache
   const gameBoard = document.getElementById("game-board");
   const button = document.getElementById("a-button");
- 
+  const cells = document.getElementsByClassName('cell');
+  
+
   const saySomething = () => {
     console.log("Hello there my old friend")
   }
