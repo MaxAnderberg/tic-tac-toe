@@ -23,7 +23,6 @@ const gameModule = (() => {
   const button = document.getElementById("a-button");
   const cells = document.getElementsByClassName('cell');
   
-
   const saySomething = () => {
     console.log("Hello there my old friend")
   }
@@ -32,8 +31,10 @@ const gameModule = (() => {
     gameBoard.innerHTML = "<h2>Hello There</h2>";
   }
 
-  // bind event
+  // bind events
   button.addEventListener('click', saySomething);
+
+  // TODO: Add event listeners to all the cells
 
   return {renderDom};
 
