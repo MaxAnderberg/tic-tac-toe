@@ -26,12 +26,12 @@ const gameModule = (() => {
     console.log("Hello there my old friend")
   }
 
-  // bind event
-  button.addEventListener('click', saySomething);
-
   const renderDom = () => {
     gameBoard.innerHTML = "<h2>Hello There</h2>";
   }
+
+  // bind event
+  button.addEventListener('click', saySomething);
 
   return {renderDom};
 
