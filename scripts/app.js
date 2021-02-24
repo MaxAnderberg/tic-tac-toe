@@ -18,28 +18,21 @@ const calculator = (() => {
 
 const gameModule = (() => {
 
-  const init = () => {
-    domChache();
-    bindEvents();
-  }
-  const domChache = () => {
-    this.gameBoard = document.getElementById("game-board");
-    this.button = document.getElementById("a-button");
-    console.log(this.button)
-  }
-
-  const bindEvents = () => {
-    this.button.addEventListener('click', saySomething);
-  }
-
+  // DOM cache
+  const gameBoard = document.getElementById("game-board");
+  const button = document.getElementById("a-button");
+ 
   const saySomething = () => {
     console.log("Hello there my old friend")
   }
 
+  // bind event
+  button.addEventListener('click', saySomething);
+
   const renderDom = () => {
-    this.gameBoard.innerHTML = "<h2>Hello There</h2>";
+    gameBoard.innerHTML = "<h2>Hello There</h2>";
   }
-  init();
+
   return {renderDom};
 
 })();
