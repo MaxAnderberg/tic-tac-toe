@@ -32,9 +32,14 @@ const gameModule = (() => {
   }
 
   // bind events
-  button.addEventListener('click', saySomething);
-
+  button.addEventListener('click', saySomething);  
+  console.log(cells)
+  
   // TODO: Add event listeners to all the cells
+  let cellsArray = [...cells]
+  cellsArray.forEach(cell => {
+    cell.addEventListener('click', saySomething);
+  });
 
   return {renderDom};
 
