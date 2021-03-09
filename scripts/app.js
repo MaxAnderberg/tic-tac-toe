@@ -23,11 +23,13 @@ const gameModule = (() => {
   const button = document.getElementById("a-button");
   const cells = document.getElementsByClassName('cell');
   
+  // set up players
+  players = ['X','O']
 
   const addMarkerToCell = (e) => {
     console.log("Hello there my old friend")
     console.log(e)
-    e.target.innerHTML = "X"
+    e.target.innerHTML = players[Math.floor(Math.random() * players.length)]
   }
 
   const renderDom = () => {
@@ -38,6 +40,7 @@ const gameModule = (() => {
   button.addEventListener('click', addMarkerToCell);  
   console.log(cells)
   
+
   // TODO: Add event listeners to all the cells
   let cellsArray = [...cells]
   cellsArray.forEach(cell => {
