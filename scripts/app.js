@@ -24,7 +24,7 @@ const gameModule = (() => {
   const cells = document.getElementsByClassName('cell');
   
 
-  const saySomething = (e) => {
+  const addMarkerToCell = (e) => {
     console.log("Hello there my old friend")
     console.log(e)
     e.target.innerHTML = "X"
@@ -35,13 +35,13 @@ const gameModule = (() => {
   }
 
   // bind events
-  button.addEventListener('click', saySomething);  
+  button.addEventListener('click', addMarkerToCell);  
   console.log(cells)
   
   // TODO: Add event listeners to all the cells
   let cellsArray = [...cells]
   cellsArray.forEach(cell => {
-    cell.addEventListener('click', saySomething);
+    cell.addEventListener('click', addMarkerToCell);
   });
 
   return {renderDom};
