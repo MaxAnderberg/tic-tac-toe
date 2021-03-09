@@ -23,8 +23,11 @@ const gameModule = (() => {
   const button = document.getElementById("a-button");
   const cells = document.getElementsByClassName('cell');
   
-  const saySomething = () => {
+
+  const saySomething = (e) => {
     console.log("Hello there my old friend")
+    console.log(e)
+    e.target.innerHTML = "X"
   }
 
   const renderDom = () => {
