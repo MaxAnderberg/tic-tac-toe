@@ -22,7 +22,29 @@ const gameModule = (() => {
   const gameBoard = document.getElementById("game-board");
   const button = document.getElementById("a-button");
   const cells = document.getElementsByClassName('cell');
-  
+  const cellsArray = [...cells] // converst node list to array
+
+  /* 
+  TODO: 
+  players - should be an object that I interact with
+  should be two objects (2 players)
+  the object should contain information such as:
+    marker
+    well, if I need something else I can just expand it right. It's an object
+  So! The object needs to be created in a factory function because we want two of them. 
+  --- 
+  I need to build a reset board function 
+  */
+
+  // resets the game board to blank
+  // currently it is just removing the inner html to blank
+  // might change this in the future
+  const resetBoard = (e) => {
+    cellsArray.forEach(element => {
+      element.innerHTML = ""
+    });
+  }
+
   // set up players
   let players = ['X','O']
   let currentPlayer = "" 
@@ -52,13 +74,12 @@ const gameModule = (() => {
   console.log(cells)
   
 
-  // TODO: Add event listeners to all the cells
-  let cellsArray = [...cells]
+  // adding eventlisteners to all the cells
   cellsArray.forEach(cell => {
     cell.addEventListener('click', addMarkerToCell);
   });
 
-  return {renderDom};
+  return {renderDom, resetBoard};
 
 })();
 
