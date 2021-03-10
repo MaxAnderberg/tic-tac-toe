@@ -3,8 +3,10 @@
 /* 
   We need three major functions: 
     1. a player creator
-    2. A module that handles the board
+    2. A module that handles the board - rendering etc. 
     3. A module that handles the flow of the game, keeps track of winner etc. 
+      handle who winns and looses
+      restart game
 */
 
 const playerFactory = (name, marker) => {
