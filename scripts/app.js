@@ -74,6 +74,21 @@ const boardModule = (() => {
 
 })();
 
+const gameModule = (() => {
+  let markCounter = 0;
+
+  const increaseMarkCounter = () => {
+    markCounter++
+  }
+
+  const getMarkCount = () => {
+    return markCounter;
+  }
+
+  return {getMarkCount, increaseMarkCounter}
+
+})();
+
 /* 
 PSEUDO CODE TIME: 
 1. Cache the board dom (it's going to be a 3x3 board) 
