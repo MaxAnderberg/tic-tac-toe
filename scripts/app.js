@@ -31,6 +31,7 @@ const boardModule = (() => {
   // currently it is just removing the inner html to blank
   // might change this in the future
   const resetBoard = (e) => {
+    // TODO: I need to add so that when I reset the board I also reset the mark count
     cellsArray.forEach(element => {
       element.innerHTML = ""
     });
