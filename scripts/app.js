@@ -14,7 +14,7 @@ const playerFactory = (name, marker) => {
   return {name, marker}
 };
 
-const gameModule = (() => {
+const boardModule = (() => {
 
   // DOM cache
   const gameBoard = document.getElementById("game-board");
