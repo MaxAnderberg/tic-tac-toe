@@ -52,8 +52,13 @@ const boardModule = (() => {
 
   const addMarkerToCell = (e) => {
     if(gameModule.getMarkCount() <= 9){
-      e.target.innerHTML = switchPlayerTurn();
-      gameModule.increaseMarkCounter();
+      // checks if a marker is already in the cell
+      if(e.target.innerHTML){
+        return; // if there is mark exit out
+      } else {
+        e.target.innerHTML = switchPlayerTurn();
+        gameModule.increaseMarkCounter();
+      }
     } 
   }
 
