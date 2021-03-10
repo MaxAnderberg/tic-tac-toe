@@ -51,9 +51,10 @@ const boardModule = (() => {
   }
 
   const addMarkerToCell = (e) => {
-    console.log("Hello there my old friend")
-    console.log(e)
-    e.target.innerHTML = switchPlayerTurn();
+    if(gameModule.getMarkCount() <= 9){
+      e.target.innerHTML = switchPlayerTurn();
+      gameModule.increaseMarkCounter();
+    } 
   }
 
   const renderDom = () => {
