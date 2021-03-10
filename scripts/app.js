@@ -22,11 +22,7 @@ const boardModule = (() => {
   const cells = document.getElementsByClassName('cell');
   const cellsArray = [...cells] // converst node list to array
 
-  /* 
-  TODO:
-  I need to build a reset board function 
-  */
-
+ 
   // resets the game board to blank
   // currently it is just removing the inner html to blank
   // might change this in the future
