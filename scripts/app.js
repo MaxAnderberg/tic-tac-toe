@@ -43,11 +43,6 @@ const gameModule = (() => {
     e.target.innerHTML = switchPlayerTurn();
   }
 
-  // build so that I first choose X then O then X so on and so forth! 
-  // Also, I need to keep track of which player just placed a marker
-  // I can achieve this with a "current player" variable that tracsk which marker was just placed
-  // then I can implement a check to see if X was placed, switch to O and vice versa 
-
   const renderDom = () => {
     gameBoard.innerHTML = "<h2>Hello There</h2>";
   }
