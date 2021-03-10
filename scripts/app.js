@@ -4,6 +4,7 @@
   We need three major functions: 
     1. a player creator
     2. A module that handles the board - rendering etc. 
+      keep track of how many markers have been placed, probably have a counter or something
     3. A module that handles the flow of the game, keeps track of winner etc. 
       handle who winns and looses
       restart game
