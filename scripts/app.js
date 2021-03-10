@@ -2,8 +2,8 @@
 
 /* 
   We need three major functions: 
-    1. a player creator
-    2. A module that handles the board - rendering etc. 
+    1. a player creator - CHECK
+    2. A module that handles the board - rendering etc. - CHECK
       keep track of how many markers have been placed, probably have a counter or something
     3. A module that handles the flow of the game, keeps track of winner etc. 
       handle who winns and looses
@@ -51,7 +51,7 @@ const boardModule = (() => {
     if(gameModule.getMarkCount() <= 9){
       // checks if a marker is already in the cell
       if(e.target.innerHTML){
-        return; // if there is mark exit out
+        return; // if there is mark in the cell, exit out
       } else {
         e.target.innerHTML = switchPlayerTurn();
         gameModule.increaseMarkCounter();
@@ -88,12 +88,14 @@ const gameModule = (() => {
     return markCounter;
   }
 
+  const checkWinner = () => {
+    // horizontally 
+
+    // vertically 
+
+    // diagonally
+  }
+
   return {getMarkCount, increaseMarkCounter}
 
 })();
-
-/* 
-PSEUDO CODE TIME: 
-1. Cache the board dom (it's going to be a 3x3 board) 
-2. Create a loop that fills the entire gameboard with X's and O's 
-*/ 
