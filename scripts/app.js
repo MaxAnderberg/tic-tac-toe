@@ -1,29 +1,11 @@
 // let gameBoard =[]
 
-
-const calculator = (() => {
-    const add = (a, b) => a + b;
-    const sub = (a, b) => a - b;
-    const mul = (a, b) => a * b;
-    const div = (a, b) => a / b;
-    return {
-      add,
-      sub,
-      mul,
-      div,
-    };
-  })();
-
-  /*
-  TODO: 
-  players - should be an object that I interact with
-  should be two objects (2 players)
-  the object should contain information such as:
-    marker (like X or O)
-    palyer name
-    well, if I need something else I can just expand it right. It's an object
-  So! The object needs to be created in a factory function because we want two of them. 
-  */
+/* 
+  We need three major functions: 
+    1. a player creator
+    2. A module that handles the board
+    3. A module that handles the flow of the game, keeps track of winner etc. 
+*/
 
 const playerFactory = (name, marker) => {
   return {name, marker}
