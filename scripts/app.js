@@ -14,7 +14,20 @@ const calculator = (() => {
     };
   })();
 
-  
+  /*
+  TODO: 
+  players - should be an object that I interact with
+  should be two objects (2 players)
+  the object should contain information such as:
+    marker (like X or O)
+    palyer name
+    well, if I need something else I can just expand it right. It's an object
+  So! The object needs to be created in a factory function because we want two of them. 
+  */
+
+const playerFactory = (name, marker) => {
+  return {name, marker}
+};
 
 const gameModule = (() => {
 
@@ -25,14 +38,7 @@ const gameModule = (() => {
   const cellsArray = [...cells] // converst node list to array
 
   /* 
-  TODO: 
-  players - should be an object that I interact with
-  should be two objects (2 players)
-  the object should contain information such as:
-    marker
-    well, if I need something else I can just expand it right. It's an object
-  So! The object needs to be created in a factory function because we want two of them. 
-  --- 
+  TODO:
   I need to build a reset board function 
   */
 
