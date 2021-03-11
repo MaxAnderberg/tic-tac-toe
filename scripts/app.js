@@ -61,7 +61,7 @@ const boardModule = (() => {
   }
 
   const addMarkerToCell = (e) => {
-    if (gameModule.getMarkCount() <= 9) {
+    
       // checks if a marker is already in the cell
       if (e.target.innerHTML) {
         return; // if there is mark in the cell, exit out
@@ -69,7 +69,7 @@ const boardModule = (() => {
         e.target.innerHTML = switchPlayerTurn();
         gameModule.increaseMarkCounter();
       }
-    }
+    
   }
 
   // TODO: Make this renderboard later on
@@ -78,7 +78,7 @@ const boardModule = (() => {
   }
 
   // bind events
-  button.addEventListener('click', addMarkerToCell);
+  button.addEventListener('click', addMarkerToCell, {once: true});
 
   // adding eventlisteners to all the cells
   cellsArray.forEach(cell => {
@@ -98,21 +98,7 @@ const boardModule = (() => {
 })();
 
 const gameModule = (() => {
-  let markCounter = 0;
 
-  const increaseMarkCounter = () => {
-    markCounter++
-  }
-
-  const getMarkCount = () => {
-    return markCounter;
-  }
-
-
-
-  return {
-    getMarkCount,
-    increaseMarkCounter
-  }
+  return;
 
 })();
