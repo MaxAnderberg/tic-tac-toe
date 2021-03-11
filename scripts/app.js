@@ -25,12 +25,16 @@ const boardModule = (() => {
     Array should have a length of 9 as the board is 3 by 3
   */
 
+
+  // instantiate board array
+
   // DOM cache
   const gameBoard = document.getElementById("game-board");
   const button = document.getElementById("a-button");
-  const cells = document.getElementsByClassName('cell');
+  // const cells = document.getElementsByClassName('cell');
+  const cell_selector = "[data-cell]"
+  const cells = document.querySelectorAll(cell_selector);
   const cellsArray = [...cells] // converst node list to array
-
 
   // resets the game board to blank
   // currently it is just removing the inner html to blank
