@@ -31,7 +31,6 @@ const boardModule = (() => {
   // DOM cache
   const gameBoard = document.getElementById("game-board");
   const button = document.getElementById("a-button");
-  // const cells = document.getElementsByClassName('cell');
   const cell_selector = "[data-cell]"
   const cells = document.querySelectorAll(cell_selector);
   const cellsArray = [...cells] // converst node list to array
