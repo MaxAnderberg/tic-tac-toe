@@ -49,6 +49,19 @@ const boardModule = (() => {
   let players = ['X', 'O']
   let currentPlayer = ""
 
+  // possible winning combinations
+  const win_conditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ]
+
+
   const switchPlayerTurn = () => {
     if (currentPlayer === "") {
       return currentPlayer = 'X'
@@ -60,27 +73,15 @@ const boardModule = (() => {
   }
 
   const addMarkerToCell = (e) => {
-    
-    // possible winning combinations
-    const win_conditions = [
-      [0, 1, 2],
-      [3, 4, 5],
-      [6, 7, 8],
-      [0, 3, 6],
-      [1, 4, 7],
-      [2, 5, 8],
-      [0, 4, 8],
-      [2, 4, 6]
-    ]
 
-      // checks if a marker is already in the cell
-      if (e.target.innerHTML) {
-        return; // if there is mark in the cell, exit out
-      } else {
-        e.target.innerHTML = switchPlayerTurn();
-        gameModule.increaseMarkCounter();
-      }
-    
+    // checks if a marker is already in the cell
+    if (e.target.innerHTML) {
+      return; // if there is mark in the cell, exit out
+    } else {
+      e.target.innerHTML = switchPlayerTurn();
+      gameModule.increaseMarkCounter();
+    }
+
   }
 
   // TODO: Make this renderboard later on
@@ -89,7 +90,9 @@ const boardModule = (() => {
   }
 
   // bind events
-  button.addEventListener('click', addMarkerToCell, {once: true});
+  button.addEventListener('click', addMarkerToCell, {
+    once: true
+  });
 
   // adding eventlisteners to all the cells
   cellsArray.forEach(cell => {
