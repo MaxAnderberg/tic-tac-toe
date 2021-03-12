@@ -72,16 +72,14 @@ const boardModule = (() => {
     }
   }
 
+  // 
   const addMarkerToCell = (e) => {
-
     // checks if a marker is already in the cell
     if (e.target.innerHTML) {
       return; // if there is mark in the cell, exit out
     } else {
       e.target.innerHTML = switchPlayerTurn();
-      gameModule.increaseMarkCounter();
     }
-
   }
 
   // TODO: Make this renderboard later on
