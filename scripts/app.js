@@ -55,6 +55,7 @@ const boardModule = (() => {
 
 
   const switchPlayerTurn = () => {
+    // if a marker hasn't been played yet, set X
     if (currentPlayer === "") {
       return currentPlayer = 'X'
     } else if (currentPlayer === 'X') {
