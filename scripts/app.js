@@ -71,7 +71,10 @@ const boardModule = (() => {
       return; // if there is mark in the cell, exit out
     } else {
       e.target.innerHTML = switchPlayerTurn();
-      checkWinner(switchPlayerTurn());
+      let lol = switchPlayerTurn();
+      if(checkWinner(lol)){
+        console.log("winner")
+      }
     }
   }
 
@@ -94,7 +97,7 @@ const boardModule = (() => {
   const checkWinner = (currentMarker) => {
     win_conditions.some(combination => {
       combination.every(index => {
-        console.log(cellsArray[index].innerHTML)
+        return cellsArray[index].innerHTML.includes(currentMarker);
       })
     })
   }
