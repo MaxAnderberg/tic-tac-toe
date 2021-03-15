@@ -72,8 +72,8 @@ const boardModule = (() => {
       return; // if there is mark in the cell, exit out
     } else {
       e.target.innerHTML = switchPlayerTurn();
-      let lol = switchPlayerTurn();
-      if(checkWinner(lol)){
+      // check if we have a winner - TODO: Finish the checkWinner function
+      if(checkWinner(currentPlayer)){ 
         console.log("winner")
       }
     }
