@@ -1,14 +1,6 @@
 // let gameBoard =[]
 
-/* 
-  We need three major functions: 
-    1. a player creator - CHECK
-    2. A module that handles the board - rendering etc. - CHECK
-      keep track of how many markers have been placed, probably have a counter or something
-    3. A module that handles the flow of the game, keeps track of winner etc. 
-      handle who winns and looses
-      restart game
-*/
+
 
 const playerFactory = (name, marker) => {
   return {
@@ -79,6 +71,7 @@ const boardModule = (() => {
       return; // if there is mark in the cell, exit out
     } else {
       e.target.innerHTML = switchPlayerTurn();
+      checkWinner(switchPlayerTurn());
     }
   }
 
@@ -97,8 +90,12 @@ const boardModule = (() => {
     cell.addEventListener('click', addMarkerToCell);
   });
 
-  const checkWinner = () => {
-    return;
+  const checkWinner = (currentMarker) => {
+    win_conditions.some(combination => {
+      combination.every(index => {
+        console.log(cellsArray[index].innerHTML)
+      })
+    })
   }
 
   return {
