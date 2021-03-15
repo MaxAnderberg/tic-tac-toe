@@ -90,6 +90,7 @@ const boardModule = (() => {
     cell.addEventListener('click', addMarkerToCell);
   });
 
+  // TODO: finish the checkWinner function
   const checkWinner = (currentMarker) => {
     win_conditions.some(combination => {
       combination.every(index => {
