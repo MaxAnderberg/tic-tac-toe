@@ -70,7 +70,9 @@ const boardModule = (() => {
       e.target.innerHTML = switchPlayerTurn();
       // check if we have a winner
       if(checkWinner(currentPlayer)){
-        winner_message.classList.add("show") 
+        winner_message.innerHTML = `The winner is ${currentPlayer}!`
+        winner_message.classList.add("show")
+
       }
     }
   }
