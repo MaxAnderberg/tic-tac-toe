@@ -54,6 +54,7 @@ const boardModule = (() => {
     [2, 4, 6]
   ]
 
+  // switches between X and O
   const switchPlayerTurn = () => {
     // if a marker hasn't been played yet, set X
     if (currentPlayer === "") {
@@ -76,7 +77,6 @@ const boardModule = (() => {
       if(checkWinner(currentPlayer)){
         winner_message_text.innerHTML = `The winner is ${currentPlayer}!`
         winner_message.classList.add("show")
-
       }
     }
   }
