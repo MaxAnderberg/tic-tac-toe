@@ -31,7 +31,7 @@ const boardModule = (() => {
   // currently it is just removing the inner html to blank
   // might change this in the future
   const resetBoard = (e) => {
-    // TODO: I need to add so that when I reset the board I also reset the mark count
+    // TODO: need to connect this to a button
     cellsArray.forEach(element => {
       element.innerHTML = ""
     });
@@ -72,16 +72,11 @@ const boardModule = (() => {
       return; // if there is mark in the cell, exit out
     } else {
       e.target.innerHTML = switchPlayerTurn();
-      // check if we have a winner - TODO: Finish the checkWinner function
+      // check if we have a winner
       if(checkWinner(currentPlayer)){ 
         console.log("winner")
       }
     }
-  }
-
-  // TODO: Make this renderboard later on
-  const renderDom = () => {
-    gameBoard.innerHTML = "<h2>Hello There</h2>";
   }
 
   // bind events
