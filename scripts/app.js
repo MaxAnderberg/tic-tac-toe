@@ -9,14 +9,6 @@ const playerFactory = (name, marker) => {
 
 const boardModule = (() => {
 
-  /* 
-    TODO: 
-    Need an array where we store all the results
-    Array should have a length of 9 as the board is 3 by 3
-  */
-
-  // instantiate board array
-
   // DOM cache
   const gameBoard = document.getElementById("game-board");
   const button = document.getElementById("a-button");
