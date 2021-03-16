@@ -24,13 +24,17 @@ const boardModule = (() => {
   const cells = document.querySelectorAll(cell_selector); // fetch the cells
   const cellsArray = [...cells] // converst node list to array
   const winner_message = document.querySelector(".winner-message")
+  const winner_message_text = document.querySelector("[data-winning-text]")
+
   // resets the game board to blank
   // currently it is just removing the inner html to blank
   // might change this in the future
   const resetBoard = (e) => {
     // TODO: need to connect this to a button
     cellsArray.forEach(element => {
-      element.innerHTML = ""
+      element.innerHTML = "";
+      currentPlayer = "";
+      winner_message.classList.remove("show");
     });
   }
 
@@ -70,7 +74,7 @@ const boardModule = (() => {
       e.target.innerHTML = switchPlayerTurn();
       // check if we have a winner
       if(checkWinner(currentPlayer)){
-        winner_message.innerHTML = `The winner is ${currentPlayer}!`
+        winner_message_text.innerHTML = `The winner is ${currentPlayer}!`
         winner_message.classList.add("show")
 
       }
