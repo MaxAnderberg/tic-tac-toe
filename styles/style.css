@@ -18,6 +18,7 @@
     text-align: center;
     border: 1px solid black;
     font-size: 70px;
+    font-weight: 700;
 }
 
 .cell:first-child, .cell:nth-child(2), .cell:nth-child(3){
