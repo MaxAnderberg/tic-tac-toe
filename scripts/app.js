@@ -22,7 +22,6 @@ const boardModule = (() => {
   // currently it is just removing the inner html to blank
   // might change this in the future
   const resetBoard = (e) => {
-    // TODO: need to connect this to a button
     cellsArray.forEach(element => {
       element.innerHTML = "";
       currentPlayer = "";
