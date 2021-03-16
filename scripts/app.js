@@ -23,7 +23,7 @@ const boardModule = (() => {
   const cell_selector = "[data-cell]" // set the selector for getting the tic tac toe cells
   const cells = document.querySelectorAll(cell_selector); // fetch the cells
   const cellsArray = [...cells] // converst node list to array
-
+  const winner_message = document.querySelector(".winner-message")
   // resets the game board to blank
   // currently it is just removing the inner html to blank
   // might change this in the future
@@ -69,8 +69,8 @@ const boardModule = (() => {
     } else {
       e.target.innerHTML = switchPlayerTurn();
       // check if we have a winner
-      if(checkWinner(currentPlayer)){ 
-        console.log(`Winner is: ${currentPlayer}`)
+      if(checkWinner(currentPlayer)){
+        winner_message.classList.add("show") 
       }
     }
   }
