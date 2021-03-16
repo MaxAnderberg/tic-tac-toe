@@ -1,8 +1,8 @@
 
-/* .board-container{
+.board-container{
     display: flex;
     justify-content: center;
-} */
+}
 
 #game-board{
     display: grid;
@@ -35,7 +35,7 @@
     border-bottom: none;
 }
 
-
+ 
 .winner-message{
     display: flex;
     justify-content: center;
