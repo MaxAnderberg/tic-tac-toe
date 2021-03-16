@@ -1,7 +1,5 @@
 // let gameBoard =[]
 
-
-
 const playerFactory = (name, marker) => {
   return {
     name,
@@ -16,7 +14,6 @@ const boardModule = (() => {
     Need an array where we store all the results
     Array should have a length of 9 as the board is 3 by 3
   */
-
 
   // instantiate board array
 
@@ -52,7 +49,6 @@ const boardModule = (() => {
     [0, 4, 8],
     [2, 4, 6]
   ]
-
 
   const switchPlayerTurn = () => {
     // if a marker hasn't been played yet, set X
@@ -103,11 +99,5 @@ const boardModule = (() => {
     resetBoard,
     checkWinner
   };
-
-})();
-
-const gameModule = (() => {
-
-  return;
 
 })();
