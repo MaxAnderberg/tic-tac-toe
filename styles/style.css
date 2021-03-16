@@ -19,6 +19,7 @@
     border: 1px solid black;
     font-size: 70px;
     font-weight: 700;
+    cursor: pointer;
 }
 
 .cell:first-child, .cell:nth-child(2), .cell:nth-child(3){
@@ -38,7 +39,33 @@
 
  
 .winner-message{
-    display: flex;
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0 ,0 , .9);
     justify-content: center;
     justify-items: center;
+    color: white;
+    font-size: 5rem;
+    flex-direction: column;
+}
+
+.winner-message button{
+    font-size: 3rem;
+    background-color: white;
+    border: 1px solid black;
+    padding: .25em .5em;
+}
+
+.winner-message button:hover{
+    background-color: black;
+    border-color: white;
+    color: white;
+}
+
+.winner-message.show{
+    display: flex;
 }
