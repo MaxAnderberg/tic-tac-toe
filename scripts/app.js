@@ -75,10 +75,10 @@ const boardModule = (() => {
     }
   }
 
-  // bind events
-  button.addEventListener('click', addMarkerToCell, {
-    once: true
-  });
+  // // bind events
+  // button.addEventListener('click', addMarkerToCell, {
+  //   once: true
+  // });
 
   // adding eventlisteners to all the cells
   cellsArray.forEach(cell => {
@@ -95,9 +95,7 @@ const boardModule = (() => {
   }
 
   return {
-    renderDom,
     resetBoard,
-    checkWinner
   };
 
 })();
