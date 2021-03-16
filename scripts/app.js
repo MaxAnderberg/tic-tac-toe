@@ -23,8 +23,8 @@ const boardModule = (() => {
   // DOM cache
   const gameBoard = document.getElementById("game-board");
   const button = document.getElementById("a-button");
-  const cell_selector = "[data-cell]"
-  const cells = document.querySelectorAll(cell_selector);
+  const cell_selector = "[data-cell]" // set the selector for getting the tic tac toe cells
+  const cells = document.querySelectorAll(cell_selector); // fetch the cells
   const cellsArray = [...cells] // converst node list to array
 
   // resets the game board to blank
@@ -98,7 +98,8 @@ const boardModule = (() => {
   const checkWinner = (currentMarker) => {
     win_conditions.some(combination => {
       combination.every(index => {
-        return cellsArray[index].innerHTML.includes(currentMarker);
+        console.log(cellsArray[index].innerHTML.includes('X'))
+        return cells[index].innerHTML.includes(currentMarker);
       })
     })
   }
