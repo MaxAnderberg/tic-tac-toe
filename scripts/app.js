@@ -94,11 +94,10 @@ const boardModule = (() => {
     cell.addEventListener('click', addMarkerToCell);
   });
 
-  // TODO: finish the checkWinner function
+  // checks if there is a winner for current placed marker
   const checkWinner = (currentMarker) => {
-    win_conditions.some(combination => {
-      combination.every(index => {
-        console.log(cellsArray[index].innerHTML.includes('X'))
+    return win_conditions.some(combination => {
+      return combination.every(index => {
         return cells[index].innerHTML.includes(currentMarker);
       })
     })
