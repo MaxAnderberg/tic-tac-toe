@@ -65,7 +65,7 @@ const boardModule = (() => {
     }
   }
 
-  // 
+  // adds either X or O to a cell
   const addMarkerToCell = (e) => {
     // checks if a marker is already in the cell
     if (e.target.innerHTML) {
