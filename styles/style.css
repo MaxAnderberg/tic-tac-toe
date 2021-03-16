@@ -17,6 +17,7 @@
     line-height: 100px;
     text-align: center;
     border: 1px solid black;
+    font-size: 70px;
 }
 
 .cell:first-child, .cell:nth-child(2), .cell:nth-child(3){
