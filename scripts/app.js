@@ -122,3 +122,14 @@ const boardModule = (() => {
   };
 
 })();
+
+// TODO: migrate some of the game related logic from boardModule to here  
+const gameModule = (() => {
+/*
+  * Handle winning
+  * Handle tie
+  * Handle PvP or PvE
+*/
+
+
+})()
