@@ -35,7 +35,7 @@ const boardModule = (() => {
   // set up players
   const player1 = playerFactory(1,'Max', 'X', true, true, false);
   const player2 = playerFactory(2,'Alter Ego', 'O', true, false, false);
-  let currentPlayer = "";
+  let currentPlayer;
 
   // possible winning combinations
   const win_conditions = [
