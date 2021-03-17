@@ -133,17 +133,17 @@ const gameModule = (() => {
   }
 
   // simple AI
-  // pick a non picked spot and add the 'O' marker
+  // pick a non picked spot and add its marker
   const easyAI = () => {
     cellsArray.forEach(element => {
       if(element.innerHTML){
         return; // if there is already a marker choose another
       } else {
-        element.innerHTML = player2.marker;
+        element.innerHTML = player2.marker; // currently player2 is hardcoded
       }
     });  
   }
 
-
+  // make a medium "difficulty" where the ai chooses randomly a spot on the board
 
 })()
