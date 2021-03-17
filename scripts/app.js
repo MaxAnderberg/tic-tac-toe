@@ -68,18 +68,6 @@ const boardModule = (() => {
     }
   }
 
-  // simple AI
-  // pick a non picked spot and add the 'O' marker
-  const easyAI = () => {
-    cellsArray.forEach(element => {
-      if(element.innerHTML){
-        return; // if there is already a marker choose another
-      } else {
-        element.innerHTML = player2.marker;
-      }
-    });  
-  }
-
   // adds either X or O to a cell
   const addMarkerToCell = (e) => {
     // checks if a marker is already in the cell
@@ -118,7 +106,6 @@ const boardModule = (() => {
 
   return {
     resetBoard,
-    easyAI
   };
 
 })();
@@ -145,6 +132,17 @@ const gameModule = (() => {
     return;
   }
 
+  // simple AI
+  // pick a non picked spot and add the 'O' marker
+  const easyAI = () => {
+    cellsArray.forEach(element => {
+      if(element.innerHTML){
+        return; // if there is already a marker choose another
+      } else {
+        element.innerHTML = player2.marker;
+      }
+    });  
+  }
 
 
 
