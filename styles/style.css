@@ -1,3 +1,6 @@
+body{
+    margin: 0;
+}
 
 .board-container{
     width: 100vw;
