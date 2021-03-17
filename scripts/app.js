@@ -1,9 +1,11 @@
-// let gameBoard =[]
-
-const playerFactory = (name, marker) => {
+const playerFactory = (id, name, marker, human, start, myTurn) => {
   return {
+    id,
     name,
-    marker
+    marker,
+    human,
+    start,
+    myTurn
   }
 };
 
@@ -11,7 +13,6 @@ const boardModule = (() => {
 
   // DOM cache
   const gameBoard = document.getElementById("game-board");
-  const button = document.getElementById("a-button");
   const cell_selector = "[data-cell]" // set the selector for getting the tic tac toe cells
   const cells = document.querySelectorAll(cell_selector); // fetch the cells
   const cellsArray = [...cells] // converst node list to array
@@ -19,20 +20,22 @@ const boardModule = (() => {
   const winner_message_text = document.querySelector("[data-winning-text]")
 
   // resets the game board to blank
-  // currently it is just removing the inner html to blank
-  // might change this in the future
   const resetBoard = (e) => {
     cellsArray.forEach(element => {
       element.innerHTML = "";
       element.classList.remove("taken");
       currentPlayer = "";
       winner_message.classList.remove("show");
+      player1.start = true;
+      player1.myTurn = false;
+      player2.myTurn = false;
     });
   }
 
   // set up players
-  let players = ['X', 'O']
-  let currentPlayer = ""
+  const player1 = playerFactory(1,'Max', 'X', true, true, false);
+  const player2 = playerFactory(2,'Alter Ego', 'O', true, false, false);
+  let currentPlayer = "";
 
   // possible winning combinations
   const win_conditions = [
@@ -44,17 +47,22 @@ const boardModule = (() => {
     [2, 5, 8],
     [0, 4, 8],
     [2, 4, 6]
-  ]
+  ];
 
-  // switches between X and O
-  const switchPlayerTurn = () => {
-    // if a marker hasn't been played yet, set X
-    if (currentPlayer === "") {
-      return currentPlayer = 'X'
-    } else if (currentPlayer === 'X') {
-      return currentPlayer = 'O'
-    } else {
-      return currentPlayer = 'X'
+  // new switcher 
+  const playerTurn = () => {
+    if (player1.start) {
+      player1.start = false; // remove the start privilege
+      player2.myTurn = true; // set player 2s turn
+      currentPlayer = player1;
+    } else if (player2.myTurn) {
+      player1.myTurn = true;
+      player2.myTurn = false;
+      currentPlayer = player2;
+    } else if (player1.myTurn) {
+      player1.myTurn = false;
+      player2.myTurn = true;
+      currentPlayer = player1;
     }
   }
 
@@ -62,13 +70,14 @@ const boardModule = (() => {
   const addMarkerToCell = (e) => {
     // checks if a marker is already in the cell
     if (e.target.innerHTML) {
-      return; // if there is mark in the cell, exit out
+      return; // if there is mark in the cell
     } else {
-      e.target.innerHTML = switchPlayerTurn();
-      e.target.classList.add("taken"); 
+      playerTurn();
+      e.target.innerHTML = currentPlayer.marker; 
+      e.target.classList.add("taken");
       // check if we have a winner
-      if(checkWinner(currentPlayer)){
-        winner_message_text.innerHTML = `The winner is ${currentPlayer}!`
+      if (checkWinner(currentPlayer.marker)) {
+        winner_message_text.innerHTML = `Player${currentPlayer.id} as ${currentPlayer.marker} wins!`
         winner_message.classList.add("show")
       }
     }
@@ -90,6 +99,8 @@ const boardModule = (() => {
 
   return {
     resetBoard,
+    player1,
+    player2
   };
 
 })();
