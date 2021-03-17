@@ -72,7 +72,7 @@ const boardModule = (() => {
   const addMarkerToCell = (e) => {
     // checks if a marker is already in the cell
     if (e.target.innerHTML) {
-      return; // if there is mark in the cell
+      return; // exit out if there is mark in the cell
     } else {
       turnCounter++;
       playerTurn();
