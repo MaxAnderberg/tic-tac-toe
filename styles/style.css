@@ -1,12 +1,18 @@
 
 .board-container{
+    width: 100vw;
+    height: 100vh;
     display: flex;
     justify-content: center;
 }
 
 #game-board{
+ 
     display: grid;
     grid-template-columns: 0fr 0fr 0fr;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
 }
 
 .cell{
