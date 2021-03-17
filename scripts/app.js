@@ -64,6 +64,7 @@ const boardModule = (() => {
       return; // if there is mark in the cell, exit out
     } else {
       e.target.innerHTML = switchPlayerTurn();
+      e.target.classList.add("taken"); 
       // check if we have a winner
       if(checkWinner(currentPlayer)){
         winner_message_text.innerHTML = `The winner is ${currentPlayer}!`
