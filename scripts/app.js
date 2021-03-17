@@ -98,9 +98,7 @@ const boardModule = (() => {
   }
 
   return {
-    resetBoard,
-    player1,
-    player2
+    resetBoard
   };
 
 })();
