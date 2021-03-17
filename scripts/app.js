@@ -125,9 +125,19 @@ const boardModule = (() => {
 
 // TODO: migrate some of the game related logic from boardModule to here  
 const gameModule = (() => {
+
+  const handleWinOrTie = () => {
+   // * Handle winning
+   // * Handle tie
+   return;
+  };
+
+  const setVsHumanOrComputer = (flag) => {
+    // need to get the flag from the Tic Tac Toe game
+    return;
+  }
+
 /*
-  * Handle winning
-  * Handle tie
   * Handle PvP or PvE
 */
 
