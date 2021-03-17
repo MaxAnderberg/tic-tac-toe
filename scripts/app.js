@@ -126,6 +126,14 @@ const boardModule = (() => {
 // TODO: migrate some of the game related logic from boardModule to here  
 const gameModule = (() => {
 
+/*
+  * Handle PvP or PvE
+    * Create the players in here based on PvP or PvE
+  * Handle player turn
+  It needs to handle all of these and then feed the board module which only job is to display
+  interactive parts of the game
+*/
+
   const handleWinOrTie = () => {
    // * Handle winning
    // * Handle tie
@@ -137,9 +145,7 @@ const gameModule = (() => {
     return;
   }
 
-/*
-  * Handle PvP or PvE
-*/
+
 
 
 })()
