@@ -24,6 +24,7 @@ const boardModule = (() => {
   const resetBoard = (e) => {
     cellsArray.forEach(element => {
       element.innerHTML = "";
+      element.classList.remove("taken");
       currentPlayer = "";
       winner_message.classList.remove("show");
     });
