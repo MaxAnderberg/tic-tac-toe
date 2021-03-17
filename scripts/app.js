@@ -66,6 +66,7 @@ const boardModule = (() => {
       player2.myTurn = true;
       currentPlayer = player1;
     }
+    turnCounter++;
   }
 
   // adds either X or O to a cell
@@ -74,7 +75,6 @@ const boardModule = (() => {
     if (e.target.innerHTML) {
       return; // exit out if there is mark in the cell
     } else {
-      turnCounter++;
       playerTurn();
       e.target.innerHTML = currentPlayer.marker; 
       e.target.classList.add("taken");
