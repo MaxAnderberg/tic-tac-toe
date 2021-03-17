@@ -94,6 +94,7 @@ const boardModule = (() => {
       if (checkWinner(currentPlayer.marker)) {
         winner_message_text.innerHTML = `Player${currentPlayer.id} as ${currentPlayer.marker} wins!`
         winner_message.classList.add("show")
+      // check for tie
       } else if(!checkWinner(currentPlayer.marker) && turnCounter === 9){
         winner_message_text.innerHTML = `It's a tie! Try again`
         winner_message.classList.add("show")
