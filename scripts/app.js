@@ -18,6 +18,7 @@ const boardModule = (() => {
   const cellsArray = [...cells] // converst node list to array
   const winner_message = document.querySelector(".winner-message")
   const winner_message_text = document.querySelector("[data-winning-text]")
+  let turnCounter = 0;
 
   // resets the game board to blank
   const resetBoard = (e) => {
@@ -29,6 +30,7 @@ const boardModule = (() => {
       player1.start = true;
       player1.myTurn = false;
       player2.myTurn = false;
+      turnCounter = 0;
     });
   }
 
@@ -66,18 +68,34 @@ const boardModule = (() => {
     }
   }
 
+  // simple AI
+  // pick a non picked spot and add the 'O' marker
+  const easyAI = () => {
+    cellsArray.forEach(element => {
+      if(element.innerHTML){
+        return; // if there is already a marker choose another
+      } else {
+        element.innerHTML = player2.marker;
+      }
+    });  
+  }
+
   // adds either X or O to a cell
   const addMarkerToCell = (e) => {
     // checks if a marker is already in the cell
     if (e.target.innerHTML) {
       return; // if there is mark in the cell
     } else {
+      turnCounter++;
       playerTurn();
       e.target.innerHTML = currentPlayer.marker; 
       e.target.classList.add("taken");
       // check if we have a winner
       if (checkWinner(currentPlayer.marker)) {
         winner_message_text.innerHTML = `Player${currentPlayer.id} as ${currentPlayer.marker} wins!`
+        winner_message.classList.add("show")
+      } else if(!checkWinner(currentPlayer.marker) && turnCounter === 9){
+        winner_message_text.innerHTML = `It's a tie! Try again`
         winner_message.classList.add("show")
       }
     }
@@ -98,7 +116,8 @@ const boardModule = (() => {
   }
 
   return {
-    resetBoard
+    resetBoard,
+    easyAI
   };
 
 })();
