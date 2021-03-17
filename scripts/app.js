@@ -113,6 +113,10 @@ const boardModule = (() => {
 // TODO: migrate some of the game related logic from boardModule to here  
 const gameModule = (() => {
 
+  // set up players
+  const player1 = playerFactory(1,'Max', 'X', true, true, false);
+  const player2 = playerFactory(2,'Alter Ego', 'O', true, false, false);
+
 /*
   * Handle PvP or PvE
     * Create the players in here based on PvP or PvE
@@ -122,10 +126,34 @@ const gameModule = (() => {
 */
 
   const handleWinOrTie = () => {
-   // * Handle winning
-   // * Handle tie
-   return;
+
+    playerTurn();  
+    // check if we have a winner
+    if (checkWinner(currentPlayer.marker)) {
+      return currentPlayer.marker;
+    // check for tie
+    } else if(!checkWinner(currentPlayer.marker) && turnCounter === 9){
+      return "tie";
+    }
+
   };
+
+    const playerTurn = () => {
+    if (player1.start) {
+      player1.start = false; // remove the start privilege
+      player2.myTurn = true; // set player 2s turn
+      currentPlayer = player1;
+    } else if (player2.myTurn) {
+      player1.myTurn = true;
+      player2.myTurn = false;
+      currentPlayer = player2;
+    } else if (player1.myTurn) {
+      player1.myTurn = false;
+      player2.myTurn = true;
+      currentPlayer = player1;
+    }
+    turnCounter++;
+  }
 
   const setVsHumanOrComputer = (flag) => {
     // need to get the flag from the Tic Tac Toe game
