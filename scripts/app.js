@@ -64,6 +64,7 @@ const playOneRound = () => {
   let gameState = getWinner();
 
   if(gameState == true){
+    console.log("xD")
     boardModule.showWinnerMessage(currentPlayer);
   } else if (gameState === "tie"){
     boardModule.showTieMessage();
@@ -99,8 +100,7 @@ const playOneRound = () => {
   }  
 
   const setWinner = (yes) => {
-    console.log("In the is there a winner func " + yes)
-    return gameState = yes;
+    gameState = yes;
   }
 
     const playerTurn = () => {
@@ -144,8 +144,8 @@ const playOneRound = () => {
     player1.myTurn = false;
     player2.myTurn = false;
     currentPlayer = "";
-    gameState = "";
-
+    gameState = false;
+    turnCounter = 0;
   }
 
   return {playOneRound, handleWinOrTie, resetPlayerSettings};
@@ -155,7 +155,7 @@ const boardModule = (() => {
 
   const resetGame = () => {
     resetBoard(event);
-    gameModule.resetPlayerSettings;
+    gameModule.resetPlayerSettings();
   }
 
   // resets the game board to blank
