@@ -113,9 +113,22 @@ const boardModule = (() => {
 // TODO: migrate some of the game related logic from boardModule to here  
 const gameModule = (() => {
 
+  // possible winning combinations
+  const win_conditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+  ];
+
   // set up players
   const player1 = playerFactory(1,'Max', 'X', true, true, false);
   const player2 = playerFactory(2,'Alter Ego', 'O', true, false, false);
+  let currentPlayer;
 
 /*
   * Handle PvP or PvE
@@ -133,7 +146,7 @@ const gameModule = (() => {
   const handleWinOrTie = () => {
     // check if we have a winner
     if (checkWinner(currentPlayer.marker)) {
-      return currentPlayer.marker;
+      return currentPlayer;
     // check for tie
     } else if(!checkWinner(currentPlayer.marker) && turnCounter === 9){
       return "tie";
