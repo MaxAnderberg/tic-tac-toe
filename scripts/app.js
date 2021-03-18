@@ -29,7 +29,6 @@ const boardModule = (() => {
       player1.start = true;
       player1.myTurn = false;
       player2.myTurn = false;
-      
     });
   }
 
@@ -39,13 +38,13 @@ const boardModule = (() => {
     if (e.target.innerHTML) {
       return; // exit out if there is mark in the cell
     } else {
-
         gameModule.playOneRound();
+        const currentPlayer = gameModule.getCurrentPlayer();
+        e.target.innerHTML = currentPlayer.marker;
+        gameModule.handleWinOrTie();
         // e.target.classList.add("taken");
-
         // winner_message_text.innerHTML = `Player${currentPlayer.id} as ${currentPlayer.marker} wins!`
         // winner_message.classList.add("show")
-
         // winner_message_text.innerHTML = `It's a tie! Try again`
         // winner_message.classList.add("show")
     }
@@ -56,17 +55,9 @@ const boardModule = (() => {
     cell.addEventListener('click', addMarkerToCell);
   });
 
-  // checks if there is a winner for current placed marker
-  const checkWinner = (currentMarker) => {
-    return win_conditions.some(combination => {
-      return combination.every(index => {
-        return cells[index].innerHTML.includes(currentMarker);
-      })
-    })
-  }
-
   return {
     resetBoard,
+    cells,
   };
 
 })();
@@ -102,29 +93,40 @@ const gameModule = (() => {
 */
 
   const playOneRound = () => {
-    playerTurn();  
-    handleWinOrTie();
+    playerTurn();
+  }
+
+  const getCurrentPlayer = () => {
+    return currentPlayer;
   }
 
   const handleWinOrTie = () => {
     // check if we have a winner
     if (checkWinner(currentPlayer.marker)) {
-      return currentPlayer;
+      console.log("This is the winner: " + currentPlayer.marker)
     // check for tie
     } else if(!checkWinner(currentPlayer.marker) && turnCounter === 9){
+      console.log("It is a tie")
       return "tie";
     }
-
   };
 
     // checks if there is a winner for current placed marker
     const checkWinner = (currentMarker) => {
       return win_conditions.some(combination => {
         return combination.every(index => {
-          return cells[index].innerHTML.includes(currentMarker);
+          return boardModule.cells[index].innerHTML.includes(currentMarker);
         })
       })
     }
+
+  const setWinner = () => {
+    return;
+  }
+
+  const getWinner = () => {
+
+  }
 
     const playerTurn = () => {
     if (player1.start) {
@@ -162,5 +164,5 @@ const gameModule = (() => {
 
   // make a medium "difficulty" where the ai chooses randomly a spot on the board
 
-  return {playOneRound};
+  return {playOneRound, getCurrentPlayer, handleWinOrTie};
 })()
