@@ -125,9 +125,12 @@ const gameModule = (() => {
   interactive parts of the game
 */
 
-  const handleWinOrTie = () => {
-
+  const playOneRound = () => {
     playerTurn();  
+    handleWinOrTie();
+  }
+
+  const handleWinOrTie = () => {
     // check if we have a winner
     if (checkWinner(currentPlayer.marker)) {
       return currentPlayer.marker;
@@ -174,4 +177,5 @@ const gameModule = (() => {
 
   // make a medium "difficulty" where the ai chooses randomly a spot on the board
 
+  return;
 })()
