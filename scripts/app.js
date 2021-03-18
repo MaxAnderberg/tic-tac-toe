@@ -42,7 +42,7 @@ const boardModule = (() => {
     winner_message_text.innerHTML = `It's a tie! Try again`
   }
 
-  // main game function
+  // main game function - TODO: this piece of logic belongs in the gameModule
   const playOneRound = () => {
     gameModule.playOneRound();
     const currentPlayer = gameModule.getCurrentPlayer();
