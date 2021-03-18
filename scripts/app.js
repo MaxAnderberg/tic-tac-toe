@@ -61,12 +61,10 @@ const playOneRound = () => {
   const handleWinOrTie = () => {
     // check if we have a winner
     if (checkWinner(currentPlayer.marker)) {
-      console.log("This is the winner: " + currentPlayer.marker)
       setWinner(true);
 
     // check for tie
     } else if(!checkWinner(currentPlayer.marker) && turnCounter === 9){
-      console.log("It is a tie");
       setWinner("tie");
     }
   };
@@ -125,7 +123,15 @@ const playOneRound = () => {
 
   // make a medium "difficulty" where the ai chooses randomly a spot on the board
 
-  return {playOneRound, getCurrentPlayer, handleWinOrTie, getWinner};
+  const resetPlayerSettings = () => {
+    player1.start = true;
+    player1.myTurn = false;
+    player2.myTurn = false;
+    currentPlayer = "";
+
+  }
+
+  return {playOneRound, handleWinOrTie, resetPlayerSettings};
 })()
 
 const boardModule = (() => {
@@ -138,16 +144,17 @@ const boardModule = (() => {
   const winner_message = document.querySelector(".winner-message")
   const winner_message_text = document.querySelector("[data-winning-text]")
 
+  const resetGame = () => {
+    resetBoard(event);
+    gameModule.resetPlayerSettings;
+  }
+
   // resets the game board to blank
   const resetBoard = (e) => {
     cellsArray.forEach(element => {
       element.innerHTML = "";
       element.classList.remove("taken");
-      currentPlayer = "";
       winner_message.classList.remove("show");
-      player1.start = true;
-      player1.myTurn = false;
-      player2.myTurn = false;
     });
   }
 
@@ -178,7 +185,7 @@ const boardModule = (() => {
   });
 
   return {
-    resetBoard,
+    resetGame,
     cells,
     addMarkerToCell,
     showWinnerMessage,
