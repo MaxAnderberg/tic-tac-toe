@@ -42,13 +42,17 @@ const boardModule = (() => {
         const currentPlayer = gameModule.getCurrentPlayer();
         e.target.innerHTML = currentPlayer.marker;
         gameModule.handleWinOrTie();
-        // e.target.classList.add("taken");
-        // winner_message_text.innerHTML = `Player${currentPlayer.id} as ${currentPlayer.marker} wins!`
-        // winner_message.classList.add("show")
-        // winner_message_text.innerHTML = `It's a tie! Try again`
-        // winner_message.classList.add("show")
+        e.target.classList.add("taken");
+        let gameState = gameModule.getWinner();
+        if(gameState){
+          winner_message.classList.add("show");
+          winner_message_text.innerHTML = `Player${currentPlayer.id} as ${currentPlayer.marker} wins!`
+        } else if (gameState === "tie"){
+          winner_message.classList.add("show");
+          winner_message_text.innerHTML = `It's a tie! Try again`
+        }
     }
-  }
+  };
 
   // adding eventlisteners to all the cells
   cellsArray.forEach(cell => {
@@ -66,6 +70,7 @@ const boardModule = (() => {
 const gameModule = (() => {
 
   let turnCounter = 0;
+  let gameState;
 
   // possible winning combinations
   const win_conditions = [
@@ -104,10 +109,12 @@ const gameModule = (() => {
     // check if we have a winner
     if (checkWinner(currentPlayer.marker)) {
       console.log("This is the winner: " + currentPlayer.marker)
+      setWinner(true);
+
     // check for tie
     } else if(!checkWinner(currentPlayer.marker) && turnCounter === 9){
-      console.log("It is a tie")
-      return "tie";
+      console.log("It is a tie");
+      setWinner("tie");
     }
   };
 
@@ -120,12 +127,13 @@ const gameModule = (() => {
       })
     }
 
-  const setWinner = () => {
-    return;
-  }
-
   const getWinner = () => {
+    return gameState;
+  }  
 
+  const setWinner = (yes) => {
+    console.log("In the is there a winner func " + yes)
+    return gameState = yes;
   }
 
     const playerTurn = () => {
@@ -164,5 +172,5 @@ const gameModule = (() => {
 
   // make a medium "difficulty" where the ai chooses randomly a spot on the board
 
-  return {playOneRound, getCurrentPlayer, handleWinOrTie};
+  return {playOneRound, getCurrentPlayer, handleWinOrTie, getWinner};
 })()
