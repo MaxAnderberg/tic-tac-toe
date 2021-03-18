@@ -9,79 +9,6 @@ const playerFactory = (id, name, marker, human, start, myTurn) => {
   }
 };
 
-const boardModule = (() => {
-
-  // DOM cache
-  const gameBoard = document.getElementById("game-board");
-  const cell_selector = "[data-cell]" // set the selector for getting the tic tac toe cells
-  const cells = document.querySelectorAll(cell_selector); // fetch the cells
-  const cellsArray = [...cells] // converst node list to array
-  const winner_message = document.querySelector(".winner-message")
-  const winner_message_text = document.querySelector("[data-winning-text]")
-
-  // resets the game board to blank
-  const resetBoard = (e) => {
-    cellsArray.forEach(element => {
-      element.innerHTML = "";
-      element.classList.remove("taken");
-      currentPlayer = "";
-      winner_message.classList.remove("show");
-      player1.start = true;
-      player1.myTurn = false;
-      player2.myTurn = false;
-    });
-  }
-
-  const showWinnerMessage = (currentPlayer) => {
-    winner_message.classList.add("show");
-    winner_message_text.innerHTML = `Player${currentPlayer.id} as ${currentPlayer.marker} wins!`
-  }
-
-  const showTieMessage = () => {
-    winner_message.classList.add("show");
-    winner_message_text.innerHTML = `It's a tie! Try again`
-  }
-
-  // main game function - TODO: this piece of logic belongs in the gameModule
-  const playOneRound = () => {
-    gameModule.playOneRound();
-    const currentPlayer = gameModule.getCurrentPlayer();
-    addMarkerToCell(event, currentPlayer);
-
-    gameModule.handleWinOrTie();
-
-    let gameState = gameModule.getWinner();
-
-    if(gameState == true){
-      showWinnerMessage(currentPlayer);
-    } else if (gameState === "tie"){
-      showTieMessage();
-    }
-  }
-
-  // adds either X or O to a cell
-  const addMarkerToCell = (e, currentPlayer) => {
-    // checks if a marker is already in the cell
-    if (e.target.innerHTML) {
-      return; // exit out if there is mark in the cell
-    } else {
-        e.target.innerHTML = currentPlayer.marker;
-        e.target.classList.add("taken");
-    }
-  };
-
-  // adding eventlisteners to all the cells
-  cellsArray.forEach(cell => {
-    cell.addEventListener('click', playOneRound);
-  });
-
-  return {
-    resetBoard,
-    cells,
-  };
-
-})();
-
 // TODO: migrate some of the game related logic from boardModule to here  
 const gameModule = (() => {
 
@@ -110,9 +37,22 @@ const gameModule = (() => {
     * Create the players in here based on PvP or PvE
 */
 
-  const playOneRound = () => {
-    playerTurn();
+const playOneRound = () => {
+
+  playerTurn();
+  const currentPlayer = getCurrentPlayer();
+  boardModule.addMarkerToCell(event, currentPlayer);
+
+  gameModule.handleWinOrTie();
+
+  let gameState = getWinner();
+
+  if(gameState == true){
+    boardModule.showWinnerMessage(currentPlayer);
+  } else if (gameState === "tie"){
+    boardModule.showTieMessage();
   }
+}
 
   const getCurrentPlayer = () => {
     return currentPlayer;
@@ -187,3 +127,63 @@ const gameModule = (() => {
 
   return {playOneRound, getCurrentPlayer, handleWinOrTie, getWinner};
 })()
+
+const boardModule = (() => {
+
+  // DOM cache
+  const gameBoard = document.getElementById("game-board");
+  const cell_selector = "[data-cell]" // set the selector for getting the tic tac toe cells
+  const cells = document.querySelectorAll(cell_selector); // fetch the cells
+  const cellsArray = [...cells] // converst node list to array
+  const winner_message = document.querySelector(".winner-message")
+  const winner_message_text = document.querySelector("[data-winning-text]")
+
+  // resets the game board to blank
+  const resetBoard = (e) => {
+    cellsArray.forEach(element => {
+      element.innerHTML = "";
+      element.classList.remove("taken");
+      currentPlayer = "";
+      winner_message.classList.remove("show");
+      player1.start = true;
+      player1.myTurn = false;
+      player2.myTurn = false;
+    });
+  }
+
+  const showWinnerMessage = (currentPlayer) => {
+    winner_message.classList.add("show");
+    winner_message_text.innerHTML = `Player${currentPlayer.id} as ${currentPlayer.marker} wins!`
+  }
+
+  const showTieMessage = () => {
+    winner_message.classList.add("show");
+    winner_message_text.innerHTML = `It's a tie! Try again`
+  }
+
+  // adds either X or O to a cell
+  const addMarkerToCell = (e, currentPlayer) => {
+    // checks if a marker is already in the cell
+    if (e.target.innerHTML) {
+      return; // exit out if there is mark in the cell
+    } else {
+        e.target.innerHTML = currentPlayer.marker;
+        e.target.classList.add("taken");
+    }
+  };
+
+  // adding eventlisteners to all the cells
+  cellsArray.forEach(cell => {
+    cell.addEventListener('click', gameModule.playOneRound);
+  });
+
+  return {
+    resetBoard,
+    cells,
+    addMarkerToCell,
+    showWinnerMessage,
+    showTieMessage
+  };
+
+})();
+
