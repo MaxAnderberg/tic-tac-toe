@@ -18,7 +18,6 @@ const boardModule = (() => {
   const cellsArray = [...cells] // converst node list to array
   const winner_message = document.querySelector(".winner-message")
   const winner_message_text = document.querySelector("[data-winning-text]")
-  let turnCounter = 0;
 
   // resets the game board to blank
   const resetBoard = (e) => {
@@ -30,43 +29,8 @@ const boardModule = (() => {
       player1.start = true;
       player1.myTurn = false;
       player2.myTurn = false;
-      turnCounter = 0;
+      
     });
-  }
-
-  // set up players
-  const player1 = playerFactory(1,'Max', 'X', true, true, false);
-  const player2 = playerFactory(2,'Alter Ego', 'O', true, false, false);
-  let currentPlayer;
-
-  // possible winning combinations
-  const win_conditions = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-  ];
-
-  // new switcher 
-  const playerTurn = () => {
-    if (player1.start) {
-      player1.start = false; // remove the start privilege
-      player2.myTurn = true; // set player 2s turn
-      currentPlayer = player1;
-    } else if (player2.myTurn) {
-      player1.myTurn = true;
-      player2.myTurn = false;
-      currentPlayer = player2;
-    } else if (player1.myTurn) {
-      player1.myTurn = false;
-      player2.myTurn = true;
-      currentPlayer = player1;
-    }
-    turnCounter++;
   }
 
   // adds either X or O to a cell
@@ -75,18 +39,15 @@ const boardModule = (() => {
     if (e.target.innerHTML) {
       return; // exit out if there is mark in the cell
     } else {
-      playerTurn();
-      e.target.innerHTML = currentPlayer.marker; 
-      e.target.classList.add("taken");
-      // check if we have a winner
-      if (checkWinner(currentPlayer.marker)) {
-        winner_message_text.innerHTML = `Player${currentPlayer.id} as ${currentPlayer.marker} wins!`
-        winner_message.classList.add("show")
-      // check for tie
-      } else if(!checkWinner(currentPlayer.marker) && turnCounter === 9){
-        winner_message_text.innerHTML = `It's a tie! Try again`
-        winner_message.classList.add("show")
-      }
+
+        gameModule.playOneRound();
+        // e.target.classList.add("taken");
+
+        // winner_message_text.innerHTML = `Player${currentPlayer.id} as ${currentPlayer.marker} wins!`
+        // winner_message.classList.add("show")
+
+        // winner_message_text.innerHTML = `It's a tie! Try again`
+        // winner_message.classList.add("show")
     }
   }
 
@@ -112,6 +73,8 @@ const boardModule = (() => {
 
 // TODO: migrate some of the game related logic from boardModule to here  
 const gameModule = (() => {
+
+  let turnCounter = 0;
 
   // possible winning combinations
   const win_conditions = [
@@ -154,6 +117,15 @@ const gameModule = (() => {
 
   };
 
+    // checks if there is a winner for current placed marker
+    const checkWinner = (currentMarker) => {
+      return win_conditions.some(combination => {
+        return combination.every(index => {
+          return cells[index].innerHTML.includes(currentMarker);
+        })
+      })
+    }
+
     const playerTurn = () => {
     if (player1.start) {
       player1.start = false; // remove the start privilege
@@ -190,5 +162,5 @@ const gameModule = (() => {
 
   // make a medium "difficulty" where the ai chooses randomly a spot on the board
 
-  return;
+  return {playOneRound};
 })()
