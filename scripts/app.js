@@ -32,31 +32,47 @@ const boardModule = (() => {
     });
   }
 
+  const showWinnerMessage = (currentPlayer) => {
+    winner_message.classList.add("show");
+    winner_message_text.innerHTML = `Player${currentPlayer.id} as ${currentPlayer.marker} wins!`
+  }
+
+  const showTieMessage = () => {
+    winner_message.classList.add("show");
+    winner_message_text.innerHTML = `It's a tie! Try again`
+  }
+
+  // main game function
+  const playOneRound = () => {
+    gameModule.playOneRound();
+    const currentPlayer = gameModule.getCurrentPlayer();
+    addMarkerToCell(event, currentPlayer);
+
+    gameModule.handleWinOrTie();
+
+    let gameState = gameModule.getWinner();
+
+    if(gameState == true){
+      showWinnerMessage(currentPlayer);
+    } else if (gameState === "tie"){
+      showTieMessage();
+    }
+  }
+
   // adds either X or O to a cell
-  const addMarkerToCell = (e) => {
+  const addMarkerToCell = (e, currentPlayer) => {
     // checks if a marker is already in the cell
     if (e.target.innerHTML) {
       return; // exit out if there is mark in the cell
     } else {
-        gameModule.playOneRound();
-        const currentPlayer = gameModule.getCurrentPlayer();
         e.target.innerHTML = currentPlayer.marker;
-        gameModule.handleWinOrTie();
         e.target.classList.add("taken");
-        let gameState = gameModule.getWinner();
-        if(gameState){
-          winner_message.classList.add("show");
-          winner_message_text.innerHTML = `Player${currentPlayer.id} as ${currentPlayer.marker} wins!`
-        } else if (gameState === "tie"){
-          winner_message.classList.add("show");
-          winner_message_text.innerHTML = `It's a tie! Try again`
-        }
     }
   };
 
   // adding eventlisteners to all the cells
   cellsArray.forEach(cell => {
-    cell.addEventListener('click', addMarkerToCell);
+    cell.addEventListener('click', playOneRound);
   });
 
   return {
