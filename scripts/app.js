@@ -9,6 +9,22 @@ const playerFactory = (id, name, marker, human, start, myTurn) => {
   }
 };
 
+const boardDOM = (() => {
+    // DOM cache object
+    const cells = document.querySelectorAll("[data-cell]"); // fetch the cells
+    const cellsArray = [...cells] // convert node list to array
+
+  const board = {
+    cells:cells,
+    cellsArray:cellsArray,
+    winner_message:document.querySelector(".winner-message"),
+    winner_message_text:document.querySelector("[data-winning-text]")
+  }
+
+  return {board}
+
+})()
+
 // TODO: migrate some of the game related logic from boardModule to here  
 const gameModule = (() => {
 
@@ -73,7 +89,7 @@ const playOneRound = () => {
     const checkWinner = (currentMarker) => {
       return win_conditions.some(combination => {
         return combination.every(index => {
-          return boardModule.cells[index].innerHTML.includes(currentMarker);
+          return boardDOM.board.cells[index].innerHTML.includes(currentMarker);
         })
       })
     }
@@ -128,6 +144,7 @@ const playOneRound = () => {
     player1.myTurn = false;
     player2.myTurn = false;
     currentPlayer = "";
+    gameState = "";
 
   }
 
@@ -136,14 +153,6 @@ const playOneRound = () => {
 
 const boardModule = (() => {
 
-  // DOM cache
-  const gameBoard = document.getElementById("game-board");
-  const cell_selector = "[data-cell]" // set the selector for getting the tic tac toe cells
-  const cells = document.querySelectorAll(cell_selector); // fetch the cells
-  const cellsArray = [...cells] // converst node list to array
-  const winner_message = document.querySelector(".winner-message")
-  const winner_message_text = document.querySelector("[data-winning-text]")
-
   const resetGame = () => {
     resetBoard(event);
     gameModule.resetPlayerSettings;
@@ -151,21 +160,21 @@ const boardModule = (() => {
 
   // resets the game board to blank
   const resetBoard = (e) => {
-    cellsArray.forEach(element => {
+    boardDOM.board.cellsArray.forEach(element => {
       element.innerHTML = "";
       element.classList.remove("taken");
-      winner_message.classList.remove("show");
+      boardDOM.board.winner_message.classList.remove("show");
     });
   }
 
   const showWinnerMessage = (currentPlayer) => {
-    winner_message.classList.add("show");
-    winner_message_text.innerHTML = `Player${currentPlayer.id} as ${currentPlayer.marker} wins!`
+    boardDOM.board.winner_message.classList.add("show");
+    boardDOM.board.winner_message_text.innerHTML = `Player${currentPlayer.id} as ${currentPlayer.marker} wins!`
   }
 
   const showTieMessage = () => {
-    winner_message.classList.add("show");
-    winner_message_text.innerHTML = `It's a tie! Try again`
+    boardDOM.board.winner_message.classList.add("show");
+    boardDOM.board.winner_message_text.innerHTML = `It's a tie! Try again`
   }
 
   // adds either X or O to a cell
@@ -180,13 +189,12 @@ const boardModule = (() => {
   };
 
   // adding eventlisteners to all the cells
-  cellsArray.forEach(cell => {
+  boardDOM.board.cellsArray.forEach(cell => {
     cell.addEventListener('click', gameModule.playOneRound);
   });
 
   return {
     resetGame,
-    cells,
     addMarkerToCell,
     showWinnerMessage,
     showTieMessage
