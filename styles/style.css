@@ -3,10 +3,26 @@ body{
 }
 
 .board-container{
+    display: flex;
+    flex-direction: column;
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
+}
+
+.back-button-container{
+    display: flex;
+    justify-content: center;
+}
+
+.back-button-container button{
+    margin-top: 80px;
+    font-size: medium;
+    width: 105px;
+    padding: 5px;
+    background-color: #728F7A;
+    color: #FFFFFF;
 }
 
 #game-board{
