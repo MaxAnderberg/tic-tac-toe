@@ -25,7 +25,6 @@ const boardDOM = (() => {
 
 })()
 
-// TODO: migrate some of the game related logic from boardModule to here  
 const gameModule = (() => {
 
   let turnCounter = 0;
@@ -64,7 +63,6 @@ const playOneRound = () => {
   let gameState = getWinner();
 
   if(gameState == true){
-    console.log("xD")
     boardModule.showWinnerMessage(currentPlayer);
   } else if (gameState === "tie"){
     boardModule.showTieMessage();
