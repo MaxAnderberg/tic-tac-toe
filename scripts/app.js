@@ -18,7 +18,9 @@ const boardDOM = (() => {
     cells:cells,
     cellsArray:cellsArray,
     winner_message:document.querySelector(".winner-message"),
-    winner_message_text:document.querySelector("[data-winning-text]")
+    winner_message_text:document.querySelector("[data-winning-text]"),
+    starting_message:document.querySelector(".starting-message.show")
+
   }
 
   return {board}
@@ -126,9 +128,7 @@ const playOneRound = () => {
 
     }
     // remove the set up screen
-    const starting_message = document.querySelector(".starting-message.show")
-    starting_message.classList.remove("show")
-    console.log(starting_message);
+    boardDOM.board.starting_message.classList.remove("show")
   }
 
   const setVsHumanOrComputer = (flag) => {
@@ -164,9 +164,15 @@ const playOneRound = () => {
 
 const boardModule = (() => {
 
+  const backButton = () => {
+    resetGame();
+    boardDOM.board.starting_message.classList.add("show")
+  }
+
   const resetGame = () => {
     resetBoard(event);
     gameModule.resetPlayerSettings();
+
   }
 
   // resets the game board to blank
@@ -209,7 +215,8 @@ const boardModule = (() => {
     resetGame,
     addMarkerToCell,
     showWinnerMessage,
-    showTieMessage
+    showTieMessage,
+    backButton
   };
 
 })();
