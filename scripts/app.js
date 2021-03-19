@@ -126,9 +126,13 @@ const playOneRound = () => {
       player1 = playerFactory(1,'Max', 'X', true, true, false);
       player2 = playerFactory(2,'Alter Ego', 'O', true, false, false);
 
+    } else if (flag === "easyComputer"){
+      console.log("easy computer pressed");
+    } else if (flag === "hardComputer"){
+      console.log("hard computer pressed");
     }
     // remove the set up screen
-    boardDOM.board.starting_message.classList.remove("show")
+    // boardDOM.board.starting_message.classList.remove("show")
   }
 
   const setVsHumanOrComputer = (flag) => {
@@ -138,6 +142,7 @@ const playOneRound = () => {
 
   // simple AI
   // pick a non picked spot and add its marker
+  // this is going to be rando
   const easyAI = () => {
     cellsArray.forEach(element => {
       if(element.innerHTML){
@@ -148,6 +153,11 @@ const playOneRound = () => {
     });  
   }
 
+  // this is going to be minimax algo
+  // super duper hard
+  const hardAI = () => {
+    return;
+  }
   // make a medium "difficulty" where the ai chooses randomly a spot on the board
 
   const resetPlayerSettings = () => {
