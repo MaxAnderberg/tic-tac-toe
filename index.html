@@ -29,15 +29,17 @@
             <button>Back</button>
         </section>
     </section>
-    <div class="starting-message">
-
+    <div class="winner-message">
+        <div data-winning-text></div>
+        <button onclick="boardModule.resetGame()">Reset Game</button>
     </div>
         <div class="starting-message show">
             <div class="starting-message-header">Tic Tac Toe</div>
             <div class="starting-message-play-text">Play versus:</div>
-            <button onclick="boardModule.resetGame()">Player</button>
-            <button onclick="boardModule.resetGame()">Easy computer</button>
-            <button onclick="boardModule.resetGame()">Hard computer</button>
+            <!-- TODO: Add functionality for setting up the players based on their choices here -->
+            <button onclick="gameModule.chooseOpponent('human')">Player</button> 
+            <button onclick="gameModule.chooseOpponent('human')">Easy computer</button>
+            <button onclick="gameModule.chooseOpponent('human')">Hard computer</button>
         </div>
     </main>
     

@@ -43,8 +43,8 @@ const gameModule = (() => {
   ];
 
   // set up players
-  const player1 = playerFactory(1,'Max', 'X', true, true, false);
-  const player2 = playerFactory(2,'Alter Ego', 'O', true, false, false);
+  let player1; 
+  let player2;
   let currentPlayer;
 
 /*
@@ -118,6 +118,19 @@ const playOneRound = () => {
     turnCounter++;
   }
 
+  // create players based on the players choice
+  const chooseOpponent = (flag) => {
+    if(flag === "human") {
+      player1 = playerFactory(1,'Max', 'X', true, true, false);
+      player2 = playerFactory(2,'Alter Ego', 'O', true, false, false);
+
+    }
+    // remove the set up screen
+    const starting_message = document.querySelector(".starting-message.show")
+    starting_message.classList.remove("show")
+    console.log(starting_message);
+  }
+
   const setVsHumanOrComputer = (flag) => {
     // need to get the flag from the Tic Tac Toe game
     return;
@@ -146,7 +159,7 @@ const playOneRound = () => {
     turnCounter = 0;
   }
 
-  return {playOneRound, handleWinOrTie, resetPlayerSettings};
+  return {playOneRound, handleWinOrTie, resetPlayerSettings, chooseOpponent};
 })()
 
 const boardModule = (() => {
@@ -166,6 +179,7 @@ const boardModule = (() => {
   }
 
   const showWinnerMessage = (currentPlayer) => {
+    console.log(boardDOM.board.winner_message)
     boardDOM.board.winner_message.classList.add("show");
     boardDOM.board.winner_message_text.innerHTML = `Player${currentPlayer.id} as ${currentPlayer.marker} wins!`
   }
