@@ -135,11 +135,6 @@ const playOneRound = () => {
     // boardDOM.board.starting_message.classList.remove("show")
   }
 
-  const setVsHumanOrComputer = (flag) => {
-    // need to get the flag from the Tic Tac Toe game
-    return;
-  }
-
   // simple AI
   // pick a non picked spot and add its marker
   // this is going to be rando
@@ -204,7 +199,7 @@ const boardModule = (() => {
     boardDOM.board.winner_message.classList.add("show");
     boardDOM.board.winner_message_text.innerHTML = `It's a tie! Try again`
   }
-
+  
   // adds either X or O to a cell
   const addMarkerToCell = (e, currentPlayer) => {
     // checks if a marker is already in the cell
