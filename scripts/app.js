@@ -54,21 +54,52 @@ const gameModule = (() => {
     * Create the players in here based on PvP or PvE
 */
 
-const playOneRound = () => {
-
+const oneAIRound = () => {
   playerTurn();
   const currentPlayer = getCurrentPlayer();
-  boardModule.addMarkerToCell(event, currentPlayer);
+  easyAI();
 
+  
   gameModule.handleWinOrTie();
 
   let gameState = getWinner();
-
+  
   if(gameState == true){
     boardModule.showWinnerMessage(currentPlayer);
   } else if (gameState === "tie"){
     boardModule.showTieMessage();
   }
+
+}
+
+// TODO: I need to figure out how and where to play a human round or AI round
+// my current idea is to build a handler that plays one turn
+// then it executes either playoneHUmanRound or playOneAIRound
+const playOneRound = () => {
+
+  playerTurn();
+  const currentPlayer = getCurrentPlayer();
+
+  // if(player2.human === false && currentPlayer.marker === 'O')
+  // {
+  //   playOneRound();
+  //   easyAI();
+  //   console.log("Hello threre")
+  // }
+  boardModule.addMarkerToCell(event, currentPlayer);
+
+  gameModule.handleWinOrTie();
+
+  let gameState = getWinner();
+  
+  if(gameState == true){
+    boardModule.showWinnerMessage(currentPlayer);
+  } else if (gameState === "tie"){
+    boardModule.showTieMessage();
+  }
+  
+  oneAIRound();
+
 }
 
   const getCurrentPlayer = () => {
@@ -127,7 +158,8 @@ const playOneRound = () => {
       player2 = playerFactory(2,'Alter Ego', 'O', true, false, false);
       
     } else if (flag === "easyComputer"){
-      console.log("easy computer pressed");
+      player1 = playerFactory(1,'Max', 'X', true, true, false);
+      player2 = playerFactory(2,'Alter Ego', 'O', false, false, false);
     } else if (flag === "hardComputer"){
       console.log("hard computer pressed");
     }
@@ -145,10 +177,9 @@ const playOneRound = () => {
 
       1. I need to look at the array to find which indexes doesn't have a marker in it
       2. Then I need to make it random between them unless it is one spot left I can just place it there
-    
-    
     */
-  
+
+   let rando;
    let tmp = [];
    for (let index = 0; index < boardDOM.board.cellsArray.length; index++) {
     const element = boardDOM.board.cellsArray[index];
@@ -157,11 +188,22 @@ const playOneRound = () => {
       tmp.push(element);
      }
    } 
-   const rando = Math.floor(Math.random() * tmp.length + 1);
-   tmp[rando].innerHTML = "O"; // change this to player 2
+
+   if(tmp.length === 1){
+    rando = 0;
+   } else {
+    rando = Math.floor(Math.random() * tmp.length);
+   }
+   // if there is atleast one available spot on the board, place a marker
+   if(tmp.length >= 1){
+     tmp[rando].innerHTML = "O" 
+
+   }
+   console.log(tmp);
+   console.log(rando)
+   
    // don't forget to manually change current player as well
    // I also neeed to hook this up to the game flow
-   console.log(tmp);
   }
     
   // this is going to be minimax algo
