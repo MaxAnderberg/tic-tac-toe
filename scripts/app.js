@@ -125,29 +125,45 @@ const playOneRound = () => {
     if(flag === "human") {
       player1 = playerFactory(1,'Max', 'X', true, true, false);
       player2 = playerFactory(2,'Alter Ego', 'O', true, false, false);
-
+      
     } else if (flag === "easyComputer"){
       console.log("easy computer pressed");
     } else if (flag === "hardComputer"){
       console.log("hard computer pressed");
     }
     // remove the set up screen
-    // boardDOM.board.starting_message.classList.remove("show")
+    boardDOM.board.starting_message.classList.remove("show")
   }
 
   // simple AI
   // pick a non picked spot and add its marker
   // this is going to be rando
   const easyAI = () => {
-    cellsArray.forEach(element => {
-      if(element.innerHTML){
-        return; // if there is already a marker choose another
-      } else {
-        element.innerHTML = player2.marker; // currently player2 is hardcoded
-      }
-    });  
-  }
+    /* 
+      TODO: when it is player 2's turn place a marker at a random spot where there isn't a placed marker
+      then hand over the turn to the human
 
+      1. I need to look at the array to find which indexes doesn't have a marker in it
+      2. Then I need to make it random between them unless it is one spot left I can just place it there
+    
+    
+    */
+  
+   let tmp = [];
+   for (let index = 0; index < boardDOM.board.cellsArray.length; index++) {
+    const element = boardDOM.board.cellsArray[index];
+
+     if (element.innerHTML === "" ) {
+      tmp.push(element);
+     }
+   } 
+   const rando = Math.floor(Math.random() * tmp.length + 1);
+   tmp[rando].innerHTML = "O"; // change this to player 2
+   // don't forget to manually change current player as well
+   // I also neeed to hook this up to the game flow
+   console.log(tmp);
+  }
+    
   // this is going to be minimax algo
   // super duper hard
   const hardAI = () => {
@@ -164,7 +180,7 @@ const playOneRound = () => {
     turnCounter = 0;
   }
 
-  return {playOneRound, handleWinOrTie, resetPlayerSettings, chooseOpponent};
+  return {playOneRound, handleWinOrTie, resetPlayerSettings, chooseOpponent, easyAI};
 })()
 
 const boardModule = (() => {
@@ -221,7 +237,7 @@ const boardModule = (() => {
     addMarkerToCell,
     showWinnerMessage,
     showTieMessage,
-    backButton
+    backButton,
   };
 
 })();
