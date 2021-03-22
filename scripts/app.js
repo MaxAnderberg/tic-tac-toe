@@ -88,7 +88,7 @@ const playOneRound = () => {
   } else if (gameState === "tie"){
     boardModule.showTieMessage();
   }
-  if(!player2.human){
+  if(!player2.human && !gameState){
     oneAIRound();
   }
 
@@ -111,6 +111,7 @@ const playOneRound = () => {
 
     // checks if there is a winner for current placed marker
     const checkWinner = (currentMarker) => {
+      console.log(currentMarker);
       return win_conditions.some(combination => {
         return combination.every(index => {
           return boardDOM.board.cells[index].innerHTML.includes(currentMarker);
@@ -162,7 +163,7 @@ const playOneRound = () => {
 
   // simple AI - randomize a spot on the board where it places the marker 
   const easyAI = () => {
-
+   currentPlayer = player2;
    let rando;
    let tmp = [];
    for (let index = 0; index < boardDOM.board.cellsArray.length; index++) {
@@ -181,7 +182,7 @@ const playOneRound = () => {
    }
    // if there is atleast one available spot on the board, place a marker
    if(tmp.length >= 1){
-     tmp[rando].innerHTML = "O"
+     tmp[rando].innerHTML = currentPlayer.marker;
      tmp[rando].classList.add("taken")
      tmp[rando].removeEventListener('click', gameModule.playOneRound); // removes the eventlistener for the cell that the computer selected
 
