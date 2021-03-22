@@ -69,10 +69,9 @@ const oneAIRound = () => {
   } else if (gameState === "tie"){
     boardModule.showTieMessage();
   }
-
 }
 
-
+// playes one round, if playing vs computer it handles the computers round as well
 const playOneRound = () => {
 
   playerTurn();
