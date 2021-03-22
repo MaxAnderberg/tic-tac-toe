@@ -129,7 +129,19 @@ body{
     flex-direction: column;
 }
 
+.starting-message-header{
+   
+}
 
 .starting-message.show{
     display: flex;
+}
+.playButtons{
+    font-size: medium;
+    width: 125px;
+    height: 40px;
+    background-color: #728F7A;
+    color: #FFFFFF;
+    margin-top: 10px;
+
 }
