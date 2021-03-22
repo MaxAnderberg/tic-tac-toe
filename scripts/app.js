@@ -247,11 +247,11 @@ const boardModule = (() => {
         e.target.classList.add("taken");
     }
   };
-
   // adding eventlisteners to all the cells
   boardDOM.board.cellsArray.forEach(cell => {
-    cell.addEventListener('click', gameModule.playOneRound);
-  });
+    cell.addEventListener('click', gameModule.playOneRound,{once:true});
+  })
+
 
   return {
     resetGame,
