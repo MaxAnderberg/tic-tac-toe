@@ -167,17 +167,8 @@ const playOneRound = () => {
     boardDOM.board.starting_message.classList.remove("show")
   }
 
-  // simple AI
-  // pick a non picked spot and add its marker
-  // this is going to be rando
+  // simple AI - randomize a spot on the board where it places the marker 
   const easyAI = () => {
-    /* 
-      TODO: when it is player 2's turn place a marker at a random spot where there isn't a placed marker
-      then hand over the turn to the human
-
-      1. I need to look at the array to find which indexes doesn't have a marker in it
-      2. Then I need to make it random between them unless it is one spot left I can just place it there
-    */
 
    let rando;
    let tmp = [];
@@ -187,8 +178,9 @@ const playOneRound = () => {
      if (element.innerHTML === "" ) {
       tmp.push(element);
      }
-   } 
+   }
 
+   // if only one board spot left place it there, otherwise randomize 
    if(tmp.length === 1){
     rando = 0;
    } else {
@@ -199,20 +191,15 @@ const playOneRound = () => {
      tmp[rando].innerHTML = "O" 
 
    }
-   console.log(tmp);
-   console.log(rando)
-   
-   // don't forget to manually change current player as well
-   // I also neeed to hook this up to the game flow
   }
-    
+
   // this is going to be minimax algo
   // super duper hard
   const hardAI = () => {
     return;
   }
-  // make a medium "difficulty" where the ai chooses randomly a spot on the board
 
+  // make a medium "difficulty" where the ai chooses randomly a spot on the board
   const resetPlayerSettings = () => {
     player1.start = true;
     player1.myTurn = false;
