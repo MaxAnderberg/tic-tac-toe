@@ -250,19 +250,21 @@ const boardModule = (() => {
         e.target.classList.add("taken");
     }
   };
-  // adding eventlisteners to all the cells
- 
+
+  // adding event listeners to all the cells
   const addEventlistener = () => {
     boardDOM.board.cellsArray.forEach(cell => {
       cell.addEventListener('click', gameModule.playOneRound,{once:true});
     })
   };
 
+  // removes the event listeners
   const removeListenerFromCells = () => {
     boardDOM.board.cellsArray.forEach(cell => {
       cell.removeEventListener('click', gameModule.playOneRound);
     })
   }
+  // add eventlisteners directly, can't be an IIFE as I need to call it in the reset function as well
   addEventlistener();
 
   return {
