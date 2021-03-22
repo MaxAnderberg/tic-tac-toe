@@ -72,20 +72,12 @@ const oneAIRound = () => {
 
 }
 
-// TODO: I need to figure out how and where to play a human round or AI round
-// my current idea is to build a handler that plays one turn
-// then it executes either playoneHUmanRound or playOneAIRound
+
 const playOneRound = () => {
 
   playerTurn();
   const currentPlayer = getCurrentPlayer();
 
-  // if(player2.human === false && currentPlayer.marker === 'O')
-  // {
-  //   playOneRound();
-  //   easyAI();
-  //   console.log("Hello threre")
-  // }
   boardModule.addMarkerToCell(event, currentPlayer);
 
   gameModule.handleWinOrTie();
