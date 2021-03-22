@@ -181,7 +181,9 @@ const playOneRound = () => {
    }
    // if there is atleast one available spot on the board, place a marker
    if(tmp.length >= 1){
-     tmp[rando].innerHTML = "O" 
+     tmp[rando].innerHTML = "O"
+     tmp[rando].classList.add("taken")
+     tmp[rando].removeEventListener('click', gameModule.playOneRound); // removes the eventlistener for the cell that the computer selected
 
    }
   }
