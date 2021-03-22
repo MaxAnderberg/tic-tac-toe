@@ -1,5 +1,7 @@
 body{
     margin: 0;
+    font-family: 'Roboto Mono', monospace;
+
 }
 
 .board-container{
@@ -127,9 +129,6 @@ body{
     flex-direction: column;
 }
 
-.starting-message-header{
-
-}
 
 .starting-message.show{
     display: flex;
