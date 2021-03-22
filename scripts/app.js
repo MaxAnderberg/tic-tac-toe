@@ -97,8 +97,9 @@ const playOneRound = () => {
   } else if (gameState === "tie"){
     boardModule.showTieMessage();
   }
-  
-  oneAIRound();
+  if(!player2.human){
+    oneAIRound();
+  }
 
 }
 
