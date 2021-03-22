@@ -145,6 +145,7 @@ const playOneRound = () => {
 
   // create players based on the players choice
   const chooseOpponent = (flag) => {
+
     if(flag === "human") {
       player1 = playerFactory(1,'Max', 'X', true, true, false);
       player2 = playerFactory(2,'Alter Ego', 'O', true, false, false);
@@ -214,6 +215,8 @@ const boardModule = (() => {
   const resetGame = () => {
     resetBoard(event);
     gameModule.resetPlayerSettings();
+    removeListenerFromCells();
+    addEventlistener();
 
   }
 
@@ -248,10 +251,19 @@ const boardModule = (() => {
     }
   };
   // adding eventlisteners to all the cells
-  boardDOM.board.cellsArray.forEach(cell => {
-    cell.addEventListener('click', gameModule.playOneRound,{once:true});
-  })
+ 
+  const addEventlistener = () => {
+    boardDOM.board.cellsArray.forEach(cell => {
+      cell.addEventListener('click', gameModule.playOneRound,{once:true});
+    })
+  };
 
+  const removeListenerFromCells = () => {
+    boardDOM.board.cellsArray.forEach(cell => {
+      cell.removeEventListener('click', gameModule.playOneRound);
+    })
+  }
+  addEventlistener();
 
   return {
     resetGame,
@@ -259,6 +271,7 @@ const boardModule = (() => {
     showWinnerMessage,
     showTieMessage,
     backButton,
+    addEventListener
   };
 
 })();
